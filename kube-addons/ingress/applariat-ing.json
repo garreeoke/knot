@@ -1,0 +1,38 @@
+{
+  "apiVersion": "extensions/v1beta1",
+  "kind": "Ingress",
+  "metadata": {
+    "name": "applariat-routes",
+    "namespace": "kube-system",
+    "annotations": {
+      "kubernetes.io/ingress.class": "nginx",
+      "nginx.org/websocket-services": "ws",
+      "ingress.kubernetes.io/rewrite-target": "/"
+    }
+  },
+  "spec": {
+    "rules": [
+      {
+	"host": "aaron-ingtest.apl.applariat.io",
+        "http": {
+          "paths": [
+            {
+              "path": "/influxdb/api",
+              "backend": {
+                "serviceName": "monitoring-influxdb",
+                "servicePort": 8086
+              }
+            },
+            {
+              "path": "/influxdb",
+              "backend": {
+                "serviceName": "monitoring-influxdb",
+                "servicePort": 8083
+              }
+            }
+	]	
+      }
+}
+    ]
+  }
+}

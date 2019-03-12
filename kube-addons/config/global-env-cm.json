@@ -1,0 +1,32 @@
+{
+  "apiVersion": "v1",
+  "kind": "ConfigMap",
+  "metadata": {
+    "name": "global-env"
+  },
+  "data": {
+    "api-url": "https://api.applariat.io/v1",
+    "cluster-id": "",
+    "rabbit-cluster-name": "applariat",
+    "rabbit-host": "amqp.applariat.io",
+    "rabbit-port": "5671",
+    "rabbitmq-ssl": "true",
+    "rabbit-svc-username": "",
+    "rabbit-svc-password": "",
+    "rabbit-vhost": "",
+    "apl-amqp-exchange-key": "cluster",
+    "propeller-apl-mq": "true",
+    "propeller-apl-amqp-routing-key": "",
+    "propeller-apl-ingress": "false",
+    "propeller-ignore-ssl": "false",
+    "policy-apl-amqp-routing-key": "",
+    "monitor-apl-amqp-routing-key": "",
+    "propeller-leave-job-pod": "true",
+    "propeller-apl-build-image-tag": "develop",
+    "cluster-mgr-apl-build-image-tag": "develop",
+    "component-builder-apl-build-image-tag": "develop",
+    "autoscaler-min-nodes": "2",
+    "autoscaler-max-nodes": "10",
+    "autoscaler-group-name": ""
+  }
+}

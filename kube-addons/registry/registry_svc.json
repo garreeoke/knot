@@ -1,0 +1,26 @@
+{
+    "kind": "Service",
+    "apiVersion": "v1",
+    "metadata": {
+        "name": "kube-registry",
+        "namespace": "kube-system",
+        "labels": {
+            "k8s-app": "kube-registry",
+            "kubernetes.io/name": "KubeRegistry"
+        }
+    },
+    "spec": {
+        "ports": [
+            {
+                "name": "registry",
+                "protocol": "TCP",
+                "port": 5000,
+                "targetPort": 5000
+            }
+        ],
+        "selector": {
+            "k8s-app": "kube-registry"
+        },
+        "sessionAffinity": "None"
+    }
+}

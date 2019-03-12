@@ -1,0 +1,81 @@
+{
+  "apiVersion": "extensions/v1beta1",
+  "kind": "Deployment",
+  "metadata": {
+    "name": "kube-registry-v0",
+    "namespace": "kube-system",
+    "labels": {
+      "k8s-app": "kube-registry",
+      "version": "v0"
+    }
+  },
+  "spec": {
+    "replicas": 1,
+    "selector": {
+      "matchLabels": {
+        "k8s-app": "kube-registry",
+        "version": "v0"
+      }
+    },
+    "template": {
+      "metadata": {
+        "labels": {
+          "k8s-app": "kube-registry",
+          "version": "v0"
+        }
+      },
+      "spec": {
+        "volumes": [
+          {
+            "name": "image-store",
+            "emptyDir": {}
+          }
+        ],
+        "containers": [
+          {
+            "name": "registry",
+            "image": "registry:2.6.2",
+            "env": [
+              {
+                "name": "REGISTRY_HTTP_ADDR",
+                "value": ":5000"
+              },
+              {
+                "name": "REGISTRY_STORAGE_FILESYSTEM_ROOTDIRECTORY",
+                "value": "/var/lib/registry"
+              },
+              {
+                "name": "REGISTRY_STORAGE_DELETE_ENABLED",
+                "value": "True"
+              }
+            ],
+            "ports": [
+              {
+                "name": "registry",
+                "containerPort": 5000,
+                "protocol": "TCP"
+              }
+            ],
+            "resources": {
+              "limits": {
+                "cpu": "100m",
+                "memory": "100Mi"
+              }
+            },
+            "volumeMounts": [
+              {
+                "name": "image-store",
+                "mountPath": "/var/lib/registry"
+              }
+            ],
+            "imagePullPolicy": "IfNotPresent"
+          }
+        ],
+        "restartPolicy": "Always",
+        "terminationGracePeriodSeconds": 30,
+        "dnsPolicy": "ClusterFirst",
+        "securityContext": {}
+      }
+    }
+  }
+}

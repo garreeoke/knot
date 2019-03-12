@@ -1,0 +1,17 @@
+FROM golang:1.8
+MAINTAINER Chris Dornsife <chris@applariat.com>
+
+ARG BB_API_KEY
+ARG PROPELLER_TAG
+
+#Pulling propeller's source code
+RUN apt-get update \
+    && apt-get install -y apt-transport-https ca-certificates wget bsdtar \
+    && wget https://applariat:$BB_API_KEY@bitbucket.org/applariat/propeller/get/$PROPELLER_TAG.zip \
+    && mkdir -p /go/src/applariat.io/propeller \
+    && bsdtar -xf $PROPELLER_TAG.zip -s'|[^/]*/||' -C /go/src/applariat.io/propeller
+
+COPY . /go/src/applariat.io/cluster-manager
+WORKDIR /go/src/applariat.io/cluster-manager
+
+RUN CGO_ENABLED=0 GOOS=linux go build -a -ldflags '-w -s' -o /target/cluster-manager .
