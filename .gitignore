@@ -1,0 +1,16 @@
+# Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm
+.idea/
+*.iml
+*.ipr
+*.iws
+
+target
+test/request.json
+cert.pem
+key.pem
+
+*.DS_Store
+opt/
+vendor/github.com/docker/distribution/contrib/docker-integration/nginx/ssl/
+vendor/github.com/docker/docker/integration-cli/fixtures/registry/
+vendor/github.com/jmespath/go-jmespath/cmd/

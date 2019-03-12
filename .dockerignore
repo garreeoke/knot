@@ -1,0 +1,7 @@
+build.sh
+Dockerfile
+Dockerfile.build
+bitbucket-pipelines.yml
+README.md
+.gitignore
+.git
