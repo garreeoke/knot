@@ -2,6 +2,6 @@
 
 Tool to help easily setup and maintain services on a cluster
 
-### Environment variables:
+# NOT READY YET
 
 
