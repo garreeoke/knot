@@ -24,7 +24,7 @@ Look in the k8s directory for examples of configuring a job to run.  Examples be
     * kubectl create -f knot_job_with_env.yaml
     
 ## VMware PKS Enterprise
-To use with PKS Enterprise, copy the contents of k8s/know_job_with_env.yaml to the desired plan in OpsMgr.
+To use with PKS Enterprise, copy the contents of k8s/knot_pks.yaml to the desired plan in OpsMgr.
 There is a box underneath "(Optional) Add-ons - Use with caution" in Plan configuration, paste contents of desired yaml there.
 
 ## Docker Example
