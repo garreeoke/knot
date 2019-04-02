@@ -14,7 +14,7 @@ func TestGetGithub(t *testing.T) {
 		User: os.Getenv("GITHUB_USER"),
 		Token: os.Getenv("GITHUB_TOKEN"),
 	}
-	artifactRoot := "/tmp/knot"
+	artifactRoot := "/knot/files"
 	err := os.MkdirAll(artifactRoot, 0700)
 	if err != nil {
 		log.Println(err)

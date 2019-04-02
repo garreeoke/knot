@@ -1,0 +1,31 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  labels:
+    run: knot
+  name: knot
+spec:
+  ttlSecondsAfterFinished: 3600
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        run: knot
+    spec:
+      containers:
+        - image: garreeoke/knot
+          name: knot
+          env:
+            - name: KNOT_TYPE
+              value: "github"
+            - name: KNOT_AUTH
+              value: "cluster"
+            - name: KNOT_URI
+              value: "owner/garreeoke/repository/k8_setup/branch/master"
+            #- name: GITHUB_USER
+            #  value: ""
+            #- name: GITHUB_TOKEN
+            #  value: ""
+          resources: {}
+      restartPolicy: OnFailure
+status: {}

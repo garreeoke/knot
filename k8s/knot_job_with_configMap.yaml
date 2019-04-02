@@ -1,0 +1,24 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  creationTimestamp: null
+  labels:
+    run: knot
+  name: knot
+spec:
+  ttlSecondsAfterFinished: 3600
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        run: knot
+    spec:
+      containers:
+        - image: garreeoke/knot
+          name: knot
+          resources: {}
+          envFrom:
+            - configMapRef:
+                name: knot
+      restartPolicy: OnFailure
+status: {}

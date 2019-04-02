@@ -12,17 +12,10 @@ func main() {
 	knot := work.Knot{
 		Action: "create",
 		Auth: os.Getenv("KNOT_AUTH"),
-		//KubeConfigPath: os.Getenv("KNOT_K8_CFG_PATH"),
 	}
 
 	if knot.Auth == "" {
 		knot.Auth = work.OnCluster
-	} else if knot.Auth == work.Local {
-		/*
-		if knot.KubeConfigPath == "" {
-			log.Fatalln("KNOT_K8_CFG env variable not set")
-		}
-		*/
 	}
 
 	// Get source at path for yamls
@@ -46,10 +39,10 @@ func main() {
 			Token: os.Getenv("GITHUB_TOKEN"),
 			Path: knotURI,
 		}
-		if g.User == "" || g.Token == "" || g.Path == "" {
+		if g.Path == "" {
 			log.Println("Not all environment variables for github provided")
-			log.Println("GITHUB_USER: ", g.User)
-			log.Println("GITHUB_TOKEN: ", g.Token)
+			//log.Println("GITHUB_USER: ", g.User)
+			//log.Println("GITHUB_TOKEN: ", g.Token)
 			log.Println("GITHUB_PATH: ", g.Path)
 			log.Fatalln(" Please set variables and try again")
 		}
@@ -70,5 +63,7 @@ func main() {
 	if err != nil {
 		log.Fatalln("Error with add ons: ")
 	}
+
+	// Figure out what to do with the output later
 
 }

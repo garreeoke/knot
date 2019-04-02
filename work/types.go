@@ -5,7 +5,7 @@ import (
 	"k8s.io/client-go/kubernetes"
 )
 
-const TmpDir = "/tmp/knot"
+const TmpDir = "/knot/files"
 
 // Knot Type Constants
 const (

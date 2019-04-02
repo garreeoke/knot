@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: knot
+  namespace: default
+data:
+  KNOT_TYPE: github
+  KNOT_URL: owner/garreeoke/repository/k8_setup/branch/master
+  KNOT_AUTH: cluster
+  #GITHUB_USER: ""
+  #GITHUB_TOKEN: ""
