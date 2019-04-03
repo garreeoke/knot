@@ -17,11 +17,15 @@ clusters using VMware Enterprise PKS.  However, it can easily be used with any k
 
 ## Kubernetes
 Look in the k8s directory for examples of configuring a job to run.  Examples below is the yaml files in the k8s folder.
+
 * With config map
-    * kubectl create -f knot_configMap.yaml
-    * kubectl create -f knot_job_with_configMap.yaml
+    * \# kubectl create -f knot_configMap.yaml
+    * \# kubectl create -f knot_job_with_configMap.yaml
 * Without configMap
-    * kubectl create -f knot_job_with_env.yaml
+    * \# kubectl create -f knot_job_with_env.yaml
+    
+After the job runs, the pod will still be available to look at the logs.  Once you are done looking a the logs,
+delete the job.
     
 ## VMware PKS Enterprise
 To use with PKS Enterprise, copy the contents of k8s/knot_pks.yaml to the desired plan in OpsMgr.
@@ -35,3 +39,8 @@ Be sure to modify the knot_pks.yaml (KNOT_URI environment variable) to point to 
 ## Notes
 * Only single entity yaml files are supported right now.  For example, if you have something to deploy that is a
 service and a deployment.  A K8s yaml file for each one should be used.
+* The repo can have one level of sub-directories.  This is useful if you want to place all related yamls for
+individual services in their own place.
+
+## Working On
+* Multiple repos
