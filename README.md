@@ -24,7 +24,7 @@ Look in the k8s directory for examples of configuring a job to run.  Examples be
 * Without configMap
     * \# kubectl create -f knot_job_with_env.yaml
     
-After the job runs, the pod will still be available to look at the logs.  Once you are done looking a the logs,
+After the job runs, the pod will still be available to look at the logs.  Once you are done looking at the logs,
 delete the job.
     
 ## VMware PKS Enterprise
