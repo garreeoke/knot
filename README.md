@@ -26,7 +26,7 @@ Look in the k8s directory for examples of configuring a job to run.  Examples be
 ## VMware PKS Enterprise
 To use with PKS Enterprise, copy the contents of k8s/knot_pks.yaml to the desired plan in OpsMgr.
 There is a box underneath "(Optional) Add-ons - Use with caution" in Plan configuration, paste contents of desired yaml there.
-Be sure to modify the yaml file (KNOT_URI environment variable) to point to the correct github repo.
+Be sure to modify the knot_pks.yaml (KNOT_URI environment variable) to point to the correct github repo.
 
 ## Docker Example
 
