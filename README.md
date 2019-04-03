@@ -1,7 +1,7 @@
-# Knot - Deploy Yaml to Kubernetes
+# Knot - Deploy repo of kubernetes spec files to a cluster
 
 Each time a kubernetes cluster is created, there is probably a set of yaml files that need to be deployed.  Use Knot to
-read from a directory and deploy all the desired yaml.  Knot was originally intended for use while deploying kubernetes
+read from a repo (github) and deploy all the desired yaml.  Knot was originally intended for use while deploying kubernetes
 clusters using VMware Enterprise PKS.  However, it can easily be used with any kubernetes cluster.
 
 ## ENV Variables to set

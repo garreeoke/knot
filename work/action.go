@@ -70,7 +70,6 @@ func (k *Knot) AddOns() error {
 		} else if workDirFileHandle.IsDir() {
 			// Channels here ?
 			go func(workDirFile os.FileInfo) {
-				//workDirErrCh := make(chan int, 1)
 				// Check if directory
 				subDirPath := k.WorkDir + "/" + workDirFile.Name()
 				// Open sub directory
@@ -86,6 +85,7 @@ func (k *Knot) AddOns() error {
 							subDirFilePath := subDirPath + "/" + subDirFileInfo.Name()
 							if !subDirFileInfo.IsDir() {
 								if len(strings.Split(subDirFileInfo.Name(),".yaml")) == 2 {
+									log.Println("Posting: ", subDirFileInfo.Name() )
 									err = k.postAddOn(subDirFileInfo, subDirFilePath, outputCh)
 									if err != nil {
 										errorCh <- subDirPath + "/" + subDirFileInfo.Name() + " ERROR: " + err.Error()
