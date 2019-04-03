@@ -31,3 +31,6 @@ There is a box underneath "(Optional) Add-ons - Use with caution" in Plan config
 
 * docker run -e "KNOT_AUTH=local" -e "KNOT_TYPE=github" -e "KNOT_URI=owner/garreeoke/repository/k8_setup/branch/master" -v /Users/torgersona/.kube/config:/root/.kube/config garreeoke/knot
 
+## Notes
+* Only single entity yaml files are supported right now.  For example, if you have something to deploy that is a
+service and a deployment.  A K8s yaml file for each one should be used.
