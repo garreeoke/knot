@@ -2,7 +2,11 @@
 
 Each time a kubernetes cluster is created, there is probably a set of yaml files that need to be deployed.  Use Knot to
 read from a repo (github) and deploy all the desired yaml.  Knot was originally intended for use while deploying kubernetes
-clusters using VMware Enterprise PKS.  However, it works with any kubernetes cluster.
+clusters using VMware Enterprise PKS, however it works with any kubernetes cluster.
+
+## Easiest Ways to Run ##
+* [Docker run](https://github.com/garreeoke/knot#docker-example)
+* Kubernetes job
 
 ## ENV Variables to set
 * KNOT_TYPE - Where to get the files.
@@ -16,7 +20,7 @@ clusters using VMware Enterprise PKS.  However, it works with any kubernetes clu
 * GITHUB_TOKEN - Specify github access token for user if repo is not public
 
 ## Kubernetes
-Look in the k8s directory for examples of configuring a job to run.  Examples below is the yaml files in the k8s folder.
+Look in the k8s directory for examples of configuring a job to run.
 
 * With config map
     * \# kubectl create -f knot_configMap.yaml
