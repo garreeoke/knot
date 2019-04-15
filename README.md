@@ -8,6 +8,9 @@ clusters using VMware Enterprise PKS, however it works with any kubernetes clust
 * [Docker run](https://github.com/garreeoke/knot#docker-example)
 * [Kubernetes job](https://github.com/garreeoke/knot#kubernetes)
 
+## Example repos
+* [My repo](https://github.com/garreeoke/k8_setup
+
 ## ENV Variables to set
 * KNOT_TYPE - Where to get the files.
     * Supported values: [github]
