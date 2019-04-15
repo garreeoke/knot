@@ -6,7 +6,7 @@ clusters using VMware Enterprise PKS, however it works with any kubernetes clust
 
 ## Easiest Ways to Run ##
 * [Docker run](https://github.com/garreeoke/knot#docker-example)
-* Kubernetes job
+* [Kubernetes job](https://github.com/garreeoke/knot#kubernetes)
 
 ## ENV Variables to set
 * KNOT_TYPE - Where to get the files.
