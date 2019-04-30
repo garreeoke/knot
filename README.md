@@ -1,15 +1,16 @@
 # Knot - Deploy repo of kubernetes spec files to a cluster
 
-Deploy Kubernetes spec files from a local directory or github repo.
-* Originally created for use with VMware Enterprise PKS to be used in Post-Deployment box
+Deploy Kubernetes spec files from a local directory or github repo. Originally created for use with 
+VMware Enterprise PKS to be used in Post-Deployment box.  However, I quickly found other uses for it.
 * Use with pipelines or other utilities to easily deploy from a specified location
+* Setup a kubernetes CronJob to deploy from a directoy at a specified interval.  Keeps everything updated.
 
 
 ## Easiest Ways to Run ##
 * [Docker run](https://github.com/garreeoke/knot#docker-example)
 * [Kubernetes job](https://github.com/garreeoke/knot#kubernetes)
 
-## Example repos
+## Example repos to pull from
 * [My repo](https://github.com/garreeoke/k8_setup)
 
 ## ENV Variables to set
@@ -21,19 +22,21 @@ Deploy Kubernetes spec files from a local directory or github repo.
     * local - Will try to read kubeconfig in users home directory
     * cluster - Use this when running as a job on K8s cluster
 * KNOT_ACTION - What action to take
-    * Supported: [create, update]
-* KNOT_WHITELIST - Comma separated list of sub-directories to use. 
+    * Supported: [create, update, dynamic]
+        * dynamic will determine if a create or update is needed, useful for running CronJob
+* KNOT_WHITELIST - Comma separated list of sub-directories to use. Not specified means deploy everything.
 * GITHUB_USER - Specify github user if repo is not public
 * GITHUB_TOKEN - Specify github access token for user if repo is not public
 
 ## Kubernetes
 Look in the k8s directory for examples of configuring a job to run.
-
-* With config map
+* With ConfigMap
     * \# kubectl create -f knot_configMap.yaml
     * \# kubectl create -f knot_job_with_configMap.yaml
-* Without configMap
+* Without ConfigMap
     * \# kubectl create -f knot_job_with_env.yaml
+* As a CronJob
+    * \# kubectl create -f knot_cronjob_with_env.yaml
     
 After the job runs, the pod will still be available to look at the logs.  Once you are done looking at the logs,
 delete the job.
@@ -46,9 +49,9 @@ Be sure to modify the knot_pks.yaml (KNOT_URI environment variable) to point to 
 ## Docker Example
 
 * Github
-    * docker run -e "KNOT_AUTH=local" -e "KNOT_TYPE=github" -e "KNOT_URI=owner/garreeoke/repository/k8_setup/branch/master" -v /root/.kube/config:/root/.kube/config garreeoke/knot
+    * docker run -e "KNOT_AUTH=local" -e "KNOT_TYPE=github" -e "KNOT_ACTION=dynamic" -e "KNOT_URI=owner/garreeoke/repository/k8_setup/branch/master" -v /root/.kube/config:/root/.kube/config garreeoke/knot
 * Local Directory
-    * docker run -e "KNOT_AUTH=local" -e "KNOT_TYPE=local" -e "KNOT_ACTION=create" -e "KNOT_WHITELIST=acme-air,d1" -v /root/.kube/config:/root/.kube/config -v /home/aaron/knot_test:/knot/files garreeoke/knot
+    * docker run -e "KNOT_AUTH=local" -e "KNOT_TYPE=local" -e "KNOT_ACTION=dynamic" -e "KNOT_WHITELIST=acme-air,d1" -v /root/.kube/config:/root/.kube/config -v /home/aaron/knot_test:/knot/files garreeoke/knot
 
 ## Notes
 * Only single type yaml files are supported.
