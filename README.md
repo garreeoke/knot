@@ -16,6 +16,7 @@ VMware Enterprise PKS to be used in Post-Deployment box.  However, I quickly fou
 ## ENV Variables to set
 * KNOT_TYPE - Where to get the files.
     * Supported values: [github, local]
+        * If local, must mount desired directory to /knot/files
 * KNOT_URI - Path to get the values if github
     * I.E. - owner/garreeoke/repository/k8_setup/branch/master
 * KNOT_AUTH - How to authenticate
