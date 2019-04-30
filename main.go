@@ -5,13 +5,14 @@ import (
 	"log"
 	"os"
 	"github.com/garreeoke/knot/work"
+	"strings"
 )
 
 func main() {
 
 	knot := work.Knot{
-		Action: "create",
-		Auth: os.Getenv("KNOT_AUTH"),
+		Operation: os.Getenv("KNOT_ACTION"),
+		Auth:      os.Getenv("KNOT_AUTH"),
 	}
 
 	if knot.Auth == "" {
@@ -25,9 +26,15 @@ func main() {
 	if knotType == "" {
 		log.Fatalln("No source type given")
 	}
-	if knotURI == "" {
+	if knot.Operation == "" {
+		log.Fatalln("No operation given: create, update, createOrUpdate")
+	}
+	if knotURI == "" && knotType != work.TypeLocal {
 		log.Fatalln("No URI given")
 	}
+
+	wl := os.Getenv("KNOT_WHITELIST")
+	knot.WhiteList = strings.Split(wl,",")
 
 	var err error
 
@@ -41,8 +48,6 @@ func main() {
 		}
 		if g.Path == "" {
 			log.Println("Not all environment variables for github provided")
-			//log.Println("GITHUB_USER: ", g.User)
-			//log.Println("GITHUB_TOKEN: ", g.Token)
 			log.Println("GITHUB_PATH: ", g.Path)
 			log.Fatalln(" Please set variables and try again")
 		}
@@ -50,6 +55,9 @@ func main() {
 		if err != nil {
 			log.Fatalln("Error getting files: ", err)
 		}
+	case work.TypeLocal:
+		log.Println("Using directory mounted to: ", )
+		knot.WorkDir = work.FileDir
 	}
 
 	log.Println("Workdir: ", knot.WorkDir)
@@ -59,7 +67,7 @@ func main() {
 		log.Fatalln("No client avaialble: ", err)
 	}
 
-	err = knot.AddOns()
+	err = knot.Tie()
 	if err != nil {
 		log.Fatalln("Error with add ons: ")
 	}

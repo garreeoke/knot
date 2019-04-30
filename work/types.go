@@ -5,11 +5,12 @@ import (
 	"k8s.io/client-go/kubernetes"
 )
 
-const TmpDir = "/knot/files"
+const FileDir = "/knot/files"
 
 // Knot Type Constants
 const (
 	TypeGitHub = "github"
+	TypeLocal = "local"
 )
 
 // K8 constants
@@ -29,12 +30,15 @@ const (
 	K8KindClusterRoleBinding    = "ClusterRoleBinding"
 	K8KindRole                  = "Role"
 	K8KindRoldBinding           = "RoleBinding"
+	K8KindNamespace 			= "Namespace"
+	K8KindNetworkPolicy			= "NetworkPolicy"
+	K8KindSecret				= "Secret"
 )
 
 // Auth contants
 const (
 	OnCluster = "cluster"
-	Local = "local"
+	Local     = "local"
 )
 
 // Source is the interface to implement for different types of locations
@@ -47,12 +51,14 @@ type Source interface {
 
 // Knot
 type Knot struct {
-	Auth    string `json:"auth,omitempty"`
+	Auth           string `json:"auth,omitempty"`
 	KubeConfigPath string `json:"kube_config_path,omitempty"`
-	Action  string `json:"action,omitempty"`
-	WorkDir string `json:"work_dir,omitempty"`
-	Client  *kubernetes.Clientset
-	Output  []*kates.Output `json:"output,omitempty"`
+	Operation      string `json:"operation,omitempty"`
+	WorkDir        string `json:"work_dir,omitempty"`
+	// Whitelist - List of sub-directories to try
+	WhiteList	   []string `json:"white_list,omitempty"`
+	Client         *kubernetes.Clientset
+	Output         []*kates.Output `json:"output,omitempty"`
 }
 
 // Github info to get gitHub data

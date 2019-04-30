@@ -24,6 +24,10 @@ spec:
               value: "cluster"
             - name: KNOT_URI
               value: "owner/garreeoke/repository/k8_setup/branch/master"
+            - name: KNOT_ACTION
+              value: "create"
+            - name: KNOT_WHITELIST
+              value: "acme-air"
             #- name: GITHUB_USER
             #  value: ""
             #- name: GITHUB_TOKEN

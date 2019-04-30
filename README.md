@@ -1,8 +1,9 @@
 # Knot - Deploy repo of kubernetes spec files to a cluster
 
-Each time a kubernetes cluster is created, there is probably a set of yaml files that need to be deployed.  Use Knot to
-read from a repo (github) and deploy all the desired yaml.  Knot was originally intended for use while deploying kubernetes
-clusters using VMware Enterprise PKS, however it works with any kubernetes cluster.
+Deploy Kubernetes spec files from a local directory or github repo.
+* Originally created for use with VMware Enterprise PKS to be used in Post-Deployment box
+* Use with pipelines or other utilities to easily deploy from a specified location
+
 
 ## Easiest Ways to Run ##
 * [Docker run](https://github.com/garreeoke/knot#docker-example)
@@ -13,12 +14,15 @@ clusters using VMware Enterprise PKS, however it works with any kubernetes clust
 
 ## ENV Variables to set
 * KNOT_TYPE - Where to get the files.
-    * Supported values: [github]
-* KNOT_URI - Path to get the values
+    * Supported values: [github, local]
+* KNOT_URI - Path to get the values if github
     * I.E. - owner/garreeoke/repository/k8_setup/branch/master
 * KNOT_AUTH - How to authenticate
     * local - Will try to read kubeconfig in users home directory
     * cluster - Use this when running as a job on K8s cluster
+* KNOT_ACTION - What action to take
+    * Supported: [create, update]
+* KNOT_WHITELIST - Comma separated list of sub-directories to use. 
 * GITHUB_USER - Specify github user if repo is not public
 * GITHUB_TOKEN - Specify github access token for user if repo is not public
 
@@ -41,13 +45,13 @@ Be sure to modify the knot_pks.yaml (KNOT_URI environment variable) to point to 
 
 ## Docker Example
 
-* docker run -e "KNOT_AUTH=local" -e "KNOT_TYPE=github" -e "KNOT_URI=owner/garreeoke/repository/k8_setup/branch/master" -v /Users/torgersona/.kube/config:/root/.kube/config garreeoke/knot
+* Github
+    * docker run -e "KNOT_AUTH=local" -e "KNOT_TYPE=github" -e "KNOT_URI=owner/garreeoke/repository/k8_setup/branch/master" -v /root/.kube/config:/root/.kube/config garreeoke/knot
+* Local Directory
+    * docker run -e "KNOT_AUTH=local" -e "KNOT_TYPE=local" -e "KNOT_ACTION=create" -e "KNOT_WHITELIST=acme-air,d1" -v /root/.kube/config:/root/.kube/config -v /home/aaron/knot_test:/knot/files garreeoke/knot
 
 ## Notes
-* Only single entity yaml files are supported right now.  For example, if you have something to deploy that is a
-service and a deployment.  A K8s yaml file for each one should be used.
+* Only single type yaml files are supported.
 * The repo can have one level of sub-directories.  This is useful if you want to place all related yamls for
 individual services in their own place.
 
-## Working On
-* Multiple repos

@@ -20,7 +20,7 @@ func ProcessFile(file []byte, src Source) error {
 	folders := strings.Split(src.GetPath(), "/")
 	i := len(folders) - 1
 	a := strings.Join(folders[i:], "/")
-	fullPath := TmpDir + "/" + a
+	fullPath := FileDir + "/" + a
 	log.Println("Copying file: ", fullPath, a)
 	err := ioutil.WriteFile(fullPath, file, 0x777)
 	if err != nil {
@@ -31,7 +31,7 @@ func ProcessFile(file []byte, src Source) error {
 	//case "", "archive":
 		// Unzip
 		log.Println("Unzipping file: ", fullPath)
-		err = unzip(fullPath, TmpDir)
+		err = unzip(fullPath, FileDir)
 		if err != nil {
 			return errors.New(fmt.Sprintf("Unable to unzip file: %v %v", fullPath, err.Error()))
 		}
@@ -55,7 +55,7 @@ func ProcessFile(file []byte, src Source) error {
 
 func GetDirectory(src Source) error {
 
-	baseDirHandle, err := os.Open(TmpDir)
+	baseDirHandle, err := os.Open(FileDir)
 	if err != nil {
 		return errors.New(fmt.Sprintf("Could not open directory: %v", err.Error()))
 	}
@@ -68,7 +68,7 @@ func GetDirectory(src Source) error {
 	exp := regexp.MustCompile("^[a-zA-Z0-9].*$")
 	for _, baseDirObject := range baseDirContents {
 		if baseDirObject.IsDir() && exp.MatchString(baseDirObject.Name()){
-			src.SetWorkDir(TmpDir + "/" + baseDirObject.Name())
+			src.SetWorkDir(FileDir + "/" + baseDirObject.Name())
 		}
 	}
 	return nil
