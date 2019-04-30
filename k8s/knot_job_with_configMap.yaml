@@ -17,6 +17,7 @@ spec:
       serviceAccount: knot
       containers:
         - image: garreeoke/knot
+          imagePullPolicy: Always
           name: knot
           resources: {}
           envFrom:
