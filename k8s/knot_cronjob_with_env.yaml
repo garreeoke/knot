@@ -27,7 +27,7 @@ spec:
                 - name: KNOT_ACTION
                   value: "dynamic"
                 - name: KNOT_WHITELIST
-                  value: "acme-air"
+                  value: "misc,wavefront"
                 #- name: GITHUB_USER
                 #  value: ""
                 #- name: GITHUB_TOKEN
