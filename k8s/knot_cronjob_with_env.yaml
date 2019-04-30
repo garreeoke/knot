@@ -3,7 +3,7 @@ kind: CronJob
 metadata:
   name: knot-cron
 spec:
-  schedule: "*/1 * * * *"
+  schedule: "*/60 * * * *"
   jobTemplate:
     spec:
       template:
