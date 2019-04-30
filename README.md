@@ -11,7 +11,7 @@ VMware Enterprise PKS to be used in Post-Deployment box.  However, I quickly fou
 * [Kubernetes job](https://github.com/garreeoke/knot#kubernetes)
 
 ## Example repos to pull from
-* [My repo](https://github.com/garreeoke/k8_setup)
+* [My repo](https://github.com/garreeoke/k8_specs)
 
 ## ENV Variables to set
 * KNOT_TYPE - Where to get the files.

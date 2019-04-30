@@ -24,7 +24,7 @@ spec:
             - name: KNOT_AUTH
               value: "cluster"
             - name: KNOT_URI
-              value: "owner/garreeoke/repository/k8_setup/branch/master"
+              value: "owner/garreeoke/repository/k8_specs/branch/master"
             - name: KNOT_ACTION
               value: "dynamic"
             - name: KNOT_WHITELIST
