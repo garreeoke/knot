@@ -1,10 +1,9 @@
 package main
 
 import (
-
+	"github.com/garreeoke/knot/work"
 	"log"
 	"os"
-	"github.com/garreeoke/knot/work"
 	"strings"
 )
 
@@ -27,14 +26,16 @@ func main() {
 		log.Fatalln("No source type given")
 	}
 	if knot.Operation == "" {
-		log.Fatalln("No operation given: create, update, createOrUpdate")
+		log.Fatalln("No operation given: create, update, dynamic")
 	}
 	if knotURI == "" && knotType != work.TypeLocal {
 		log.Fatalln("No URI given")
 	}
 
-	wl := os.Getenv("KNOT_WHITELIST")
-	knot.WhiteList = strings.Split(wl,",")
+	if os.Getenv("KNOT_WHITELIST") != "" {
+		wl := os.Getenv("KNOT_WHITELIST")
+		knot.WhiteList = strings.Split(wl,",")
+	}
 
 	var err error
 
