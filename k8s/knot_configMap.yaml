@@ -5,7 +5,7 @@ metadata:
   namespace: default
 data:
   KNOT_TYPE: github
-  KNOT_URL: owner/garreeoke/repository/k8_setup/branch/master
+  KNOT_URI: owner/garreeoke/repository/k8_setup/branch/master
   KNOT_AUTH: cluster
   KNOT_ACTION: create
   KNOT_WHITELIST: "acme-air"
