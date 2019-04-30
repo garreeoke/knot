@@ -6,31 +6,31 @@ spec:
   schedule: "*/1 * * * *"
   jobTemplate:
     spec:
-    template:
-      metadata:
-        creationTimestamp: null
-        labels:
-          run: knot-cron
-      spec:
-        serviceAccount: knot
-        containers:
-          - image: garreeoke/knot
-            imagePullPolicy: Always
-            name: knot
-            env:
-              - name: KNOT_TYPE
-                value: "github"
-              - name: KNOT_AUTH
-                value: "cluster"
-              - name: KNOT_URI
-                value: "owner/garreeoke/repository/k8_setup/branch/master"
-              - name: KNOT_ACTION
-                value: "dynamic"
-              - name: KNOT_WHITELIST
-                value: "acme-air"
-              #- name: GITHUB_USER
-              #  value: ""
-              #- name: GITHUB_TOKEN
-              #  value: ""
-            resources: {}
-        restartPolicy: OnFailure
+      template:
+        metadata:
+          creationTimestamp: null
+          labels:
+            run: knot-cron
+        spec:
+          serviceAccount: knot
+          containers:
+            - image: garreeoke/knot
+              imagePullPolicy: Always
+              name: knot
+              env:
+                - name: KNOT_TYPE
+                  value: "github"
+                - name: KNOT_AUTH
+                  value: "cluster"
+                - name: KNOT_URI
+                  value: "owner/garreeoke/repository/k8_setup/branch/master"
+                - name: KNOT_ACTION
+                  value: "dynamic"
+                - name: KNOT_WHITELIST
+                  value: "acme-air"
+                #- name: GITHUB_USER
+                #  value: ""
+                #- name: GITHUB_TOKEN
+                #  value: ""
+              resources: {}
+          restartPolicy: OnFailure
